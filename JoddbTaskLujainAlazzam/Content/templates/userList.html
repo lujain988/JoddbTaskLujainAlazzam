@@ -1,0 +1,46 @@
+﻿<div ng-controller="UserListController as vm">
+    <h2>User List</h2>
+
+    <!-- Display error message if it exists -->
+    <div ng-if="vm.errorMessage" class="alert alert-danger">
+        {{ vm.errorMessage }}
+    </div>
+
+    <!-- Table displaying user data -->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile Number</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="user in vm.users">
+                <td><img ng-src="{{ '/' + user.PhotoPath }}" alt="User Photo" width="50" height="50" /></td>
+                <td>{{ user.Name }}</td>
+                <td>{{ user.Email }}</td>
+                <td>{{ user.MobileNumber }}</td>
+                <td>{{ user.Password }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Pagination controls -->
+    <div class="pagination">
+        <button ng-repeat="page in vm.visiblePages track by $index"
+                ng-click="vm.goToPage(page)"
+                ng-class="{'active': page === vm.pageNumber}">
+            {{ page }}
+        </button>
+
+        <!-- "Next" and "Last" buttons for easier navigation -->
+        <button ng-click="vm.goToPage(vm.pageNumber + 1)" ng-disabled="vm.pageNumber >= vm.totalPages">Next</button>
+        <button ng-click="vm.goToPage(vm.totalPages)" ng-disabled="vm.pageNumber === vm.totalPages">Last ({{ vm.totalPages }})</button>
+    </div>
+
+    <!-- Loading Indicator -->
+    <p ng-if="vm.loading" class="text-center">Loading...</p>
+</div>

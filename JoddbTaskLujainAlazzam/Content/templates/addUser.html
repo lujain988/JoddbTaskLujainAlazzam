@@ -1,0 +1,58 @@
+﻿<div ng-controller="AddUserController as vm">
+    <h2>Add New User</h2>
+
+    <!-- Display success message if exists -->
+    <div ng-if="vm.successMessage" class="alert alert-success">
+        {{ vm.successMessage }}
+    </div>
+
+    <!-- Display error message if exists -->
+    <div ng-if="vm.errorMessage" class="alert alert-danger">
+        {{ vm.errorMessage }}
+    </div>
+
+    <div ng-controller="AddUserController as vm">
+        <h2>Add New User</h2>
+
+        <!-- Display success message if exists -->
+        <div ng-if="vm.successMessage" class="alert alert-success">
+            {{ vm.successMessage }}
+        </div>
+
+        <!-- Display error message if exists -->
+        <div ng-if="vm.errorMessage" class="alert alert-danger">
+            {{ vm.errorMessage }}
+        </div>
+
+        <form id="addUserForm" ng-submit="vm.submitForm()" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" ng-model="vm.user.Name" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" ng-model="vm.user.Email" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="mobileNumber">Mobile Number</label>
+                <input type="text" id="mobileNumber" ng-model="vm.user.MobileNumber" class="form-control" required />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" ng-model="vm.user.Password" class="form-control" required />
+            </div>
+
+            <!-- File input for photo -->
+            <div class="form-group">
+                <label for="photo">Photo</label>
+                <input type="file" id="photo" class="form-control" required />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+
+</div>
