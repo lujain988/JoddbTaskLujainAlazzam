@@ -8,7 +8,7 @@ namespace JoddbTaskLujainAlazzam.Controllers
     {
         private UserManagementDBEntities db = new UserManagementDBEntities();
 
-    
+
 
         [HttpPost]
         public JsonResult Login(string username, string password)
@@ -17,16 +17,11 @@ namespace JoddbTaskLujainAlazzam.Controllers
             if (user != null)
             {
                 Session["UserId"] = user.Id;
-
                 return Json(new { success = true, message = "Login successful" });
             }
             return Json(new { success = false, message = "Invalid username or password" });
         }
+    
 
-        public ActionResult Logout()
-        {
-            Session.Clear();
-            return RedirectToAction("Login", "Account");
-        }
     }
 }

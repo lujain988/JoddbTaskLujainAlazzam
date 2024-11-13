@@ -20,14 +20,14 @@
             // Call the UserService to login
             UserService.login(vm.username, vm.password)
                 .then(function (response) {
-                    console.log('Login response:', response.data); // Log the response from the server
+                    console.log('Login response in LoginController:', response); // Log the full response
 
-                    if (response.data.success) {
-                        console.log('Login successful, redirecting to user list...');
-                        $location.path('/home'); 
+                    if (response && response.data && response.data.success) { // Access response.data.success
+                        console.log('Login successful, redirecting to home...');
+                        $location.path('/home');
                     } else {
-                        console.log('Login failed:', response.data.message);
-                        vm.errorMessage = response.data.message || 'Invalid username or password';
+                        console.log('Login failed:', response && response.data ? response.data.message : 'Unknown error');
+                        vm.errorMessage = response && response.data ? response.data.message : 'Invalid username or password';
                     }
                 })
                 .catch(function (error) {

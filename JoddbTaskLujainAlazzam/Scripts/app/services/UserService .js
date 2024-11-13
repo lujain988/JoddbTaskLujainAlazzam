@@ -22,12 +22,14 @@
                 username: username,
                 password: password
             }).then(function (response) {
-                return response.data;
+                console.log("Server response in UserService:", response); // Log the full server response
+                return response; // Return the full response object here
             }).catch(function (error) {
-                console.error("Error during login:", error);
+                console.error("Error during login in UserService:", error);
                 return Promise.reject("Login failed.");
             });
         }
+
         function getUserList(pageNumber, pageSize) {
             return $http.get('/UserList/UserList', {
                 params: { pageNumber: pageNumber, pageSize: pageSize }
@@ -42,8 +44,6 @@
                 return Promise.reject("Failed to load user list.");
             });
         }
-
-
 
         // Add user function
         function addUser(formData) {
