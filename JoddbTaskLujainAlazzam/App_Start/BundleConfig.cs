@@ -28,7 +28,8 @@ namespace JoddbTaskLujainAlazzam
             // Bootstrap CSS and site CSS bundle
             bundles.Add(new StyleBundle("~/Content/css").Include(
                         "~/Content/bootstrap.css",
-                        "~/Content/site.css"));
+                        "~/Content/site.css",
+                         "~/Content/css/sidebar.css"));
 
             // AngularJS bundle
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(

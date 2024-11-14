@@ -44,3 +44,129 @@
     <!-- Loading Indicator -->
     <p ng-if="vm.loading" class="text-center">Loading...</p>
 </div>
+ <style>
+
+     /* Container Styling */
+     div[ng-controller="UserListController as vm"] {
+         max-width: 900px;
+         margin: 20px auto;
+         padding: 20px;
+         background-color: #f7f9fc;
+         border-radius: 8px;
+         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     }
+
+         /* Title Styling */
+         div[ng-controller="UserListController as vm"] h2 {
+             color: #333;
+             font-weight: bold;
+             font-size: 20px;
+             margin-bottom: 20px;
+         }
+
+     /* Error Message Styling */
+     .alert.alert-danger {
+         background-color: #f8d7da;
+         color: #721c24;
+         border: 1px solid #f5c6cb;
+         padding: 10px;
+         border-radius: 5px;
+         margin-bottom: 15px;
+     }
+
+     /* Table Styling */
+     .table {
+         width: 100%;
+         border-collapse: collapse;
+         font-size: 14px;
+         color: #333;
+     }
+
+         .table thead {
+             background-color: #f0f4f8;
+             text-transform: uppercase;
+             color: #333;
+         }
+
+         .table th,
+         .table td {
+             padding: 12px 15px;
+             text-align: left;
+         }
+
+             .table td img {
+                 border-radius: 50%;
+                 width: 40px;
+                 height: 40px;
+             }
+
+         /* Striped Rows */
+         .table tbody tr:nth-child(even) {
+             background-color: #f9f9ff;
+         }
+
+         .table tbody tr:hover {
+             background-color: #f0f4f8;
+         }
+
+     /* Status Badge Styling */
+     .badge {
+         display: inline-block;
+         padding: 5px 10px;
+         font-size: 12px;
+         font-weight: bold;
+         border-radius: 12px;
+         text-transform: capitalize;
+     }
+
+     .badge-paid {
+         background-color: #d4edda;
+         color: #155724;
+     }
+
+     .badge-cancelled {
+         background-color: #f8d7da;
+         color: #721c24;
+     }
+
+     .badge-refunded {
+         background-color: #d1ecf1;
+         color: #0c5460;
+     }
+
+     /* Pagination Styling */
+     .pagination {
+         display: flex;
+         justify-content: center;
+         margin-top: 20px;
+     }
+
+         .pagination button {
+             background-color: #6f63cc;
+             color: white;
+             border: none;
+             border-radius: 4px;
+             padding: 8px 12px;
+             margin: 0 5px;
+             cursor: pointer;
+             font-size: 14px;
+         }
+
+             .pagination button:hover {
+                 background-color: #5a51b1;
+             }
+
+             .pagination button:disabled {
+                 background-color: #ccc;
+                 cursor: not-allowed;
+             }
+
+     /* Loading Indicator */
+     .text-center {
+         text-align: center;
+         font-weight: bold;
+         color: #6f63cc;
+         margin-top: 20px;
+     }
+
+ </style>

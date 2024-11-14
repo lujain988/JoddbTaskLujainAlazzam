@@ -11,44 +11,84 @@
         var vm = this;
 
         vm.file = null;
-        vm.successMessage = '';
-        vm.errorMessage = '';
-        vm.isLoading = false;
 
-        // Function to handle file selection
         vm.onFileChange = function (event) {
             $scope.$apply(function () {
-                vm.file = event.target.files[0] || null;  // Assign the selected file
+                vm.file = event.target.files[0] || null;
                 if (vm.file) {
-                    vm.errorMessage = '';  // Clear any previous error message
+                    vm.uploadFile(); 
                 }
             });
         };
 
-        // Function to upload the file
         vm.uploadFile = function () {
             if (!vm.file) {
-                vm.errorMessage = 'Please select a file to upload.';
+                Swal.fire({
+                    icon: 'error',
+                    title: 'No File Selected',
+                    text: 'Please select a file to upload.',
+                    toast: true,
+                    position: 'top-end',
+                    timer: 3500,
+                    showConfirmButton: false
+                });
                 return;
             }
 
-            vm.isLoading = true;
+            // Show loading SweetAlert notification
+            Swal.fire({
+                title: 'Uploading...',
+                text: 'Please wait while we upload your file.',
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
 
             UserImportService.uploadFile(vm.file).then(function (response) {
-                vm.isLoading = false;
+                Swal.close();  
 
                 if (response.data.success) {
-                    vm.successMessage = response.data.message;
-                    vm.errorMessage = '';
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Upload Successful!',
+                        text: 'File imported successfully!',
+                        toast: true,
+                        position: 'top-end',
+                        timer: 3500,
+                        showConfirmButton: false
+                    });
                 } else {
-                    vm.errorMessage = response.data.message;
-                    vm.successMessage = '';
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Upload Failed',
+                        text: 'The users in this file are alrady uploaded',
+                        toast: true,
+                        position: 'top-end',
+                        timer: 3500,
+                        showConfirmButton: false
+                    });
                 }
             }, function (error) {
-                vm.isLoading = false;
-                vm.errorMessage = 'An error occurred during the upload process.';
-                vm.successMessage = '';
+                Swal.close();  // Close the loading notification
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Upload Error',
+                    text: error.data && error.data.message ? error.data.message : 'An error occurred during the upload process.',
+                    toast: true,
+                    position: 'top-end',
+                    timer: 3500,
+                    showConfirmButton: false
+                });
             });
+        };
+
+        // Function to trigger file input programmatically
+        vm.triggerFileInput = function () {
+            document.getElementById('excelFile').click();
         };
     }
 })();

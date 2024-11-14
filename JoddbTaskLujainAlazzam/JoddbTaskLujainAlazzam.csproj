@@ -202,9 +202,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\css\sidebar.css" />
+    <Content Include="Content\image\shield.png" />
     <Content Include="Content\templates\addUser.html" />
     <Content Include="Content\templates\home.html" />
-    <Content Include="Content\templates\UserImport.html" />
     <Content Include="Content\templates\userList.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />

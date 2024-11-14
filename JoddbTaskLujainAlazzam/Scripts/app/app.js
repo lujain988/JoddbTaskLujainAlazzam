@@ -33,7 +33,7 @@
                 .otherwise({
                     redirectTo: '/login'  
                 });
-
+            $locationProvider.html5Mode(false);
             $locationProvider.hashPrefix('');
         }]);
 })();
