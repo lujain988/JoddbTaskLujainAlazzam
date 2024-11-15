@@ -9,7 +9,7 @@
 
     function HomeController() {
         var vm = this;
-        vm.title = 'Welcome to Dashboard';
-        vm.message = 'This is the home page content!';
+        vm.title = 'This is the home page content!';
+        vm.message = 'Welcome to Dashboard';
     }
 })();
