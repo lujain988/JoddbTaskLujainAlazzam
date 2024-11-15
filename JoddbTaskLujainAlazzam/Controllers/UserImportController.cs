@@ -139,10 +139,10 @@ namespace YourNamespace.Controllers
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
-        // Validate MobileNo format
+ 
         private bool IsValidMobileNumber(string mobileNo)
         {
-            var regex = new Regex(@"^(\+|00)?\d{10,15}$");  // Allows + or 00 followed by 10-15 digits
+            var regex = new Regex(@"^(\+|00)?\d{10,15}$");  
             return !string.IsNullOrEmpty(mobileNo) && regex.IsMatch(mobileNo);
         }
     }

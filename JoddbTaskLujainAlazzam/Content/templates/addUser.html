@@ -1,47 +1,50 @@
-﻿<div ng-controller="AddUserController as vm" style="padding: 20px; max-width: 800px; margin: 0 auto; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-    <h2 style="color: #333; font-weight: bold; margin-bottom: 20px;">Add New User</h2>
+﻿<div ng-controller="AddUserController as vm" class="container" ng-show="$root.isLoggedIn">
+    <div class="row justify-content-center">
+        <div class="col-md-8 offset-md-2">
+            <div style="padding: 20px; background-color: white; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <h2 style="color: #333; font-weight: bold; margin-bottom: 20px;">Add New User</h2>
 
-    <!-- Display success message if exists -->
-    <div ng-if="vm.successMessage" class="alert alert-success" style="margin-bottom: 20px; color: #155724; background-color: #d4edda; padding: 10px; border-radius: 5px;">
-        {{ vm.successMessage }}
+                <div ng-if="vm.successMessage" class="alert alert-success" style="margin-bottom: 20px; color: #155724; background-color: #d4edda; padding: 10px; border-radius: 5px;">
+                    {{ vm.successMessage }}
+                </div>
+
+                <div ng-if="vm.errorMessage" class="alert alert-danger" style="margin-bottom: 20px; color: #721c24; background-color: #f8d7da; padding: 10px; border-radius: 5px;">
+                    {{ vm.errorMessage }}
+                </div>
+
+                <form id="addUserForm" ng-submit="vm.submitForm()" enctype="multipart/form-data" style="display: flex; flex-wrap: wrap; gap: 15px;">
+                    <div class="form-group" style="flex: 1 1 45%; min-width: 200px;">
+                        <label for="userName" style="font-weight: bold; color: #333;">Name</label>
+                        <input type="text" id="userName" ng-model="vm.user.Name" class="form-control" required />
+                    </div>
+
+                    <div class="form-group" style="flex: 1 1 45%; min-width: 200px;">
+                        <label for="userEmail" style="font-weight: bold; color: #333;">Email</label>
+                        <input type="email" id="userEmail" ng-model="vm.user.Email" class="form-control" required />
+                    </div>
+
+                    <div class="form-group" style="flex: 1 1 45%; min-width: 200px;">
+                        <label for="userMobileNumber" style="font-weight: bold; color: #333;">Mobile Number</label>
+                        <input type="text" id="userMobileNumber" ng-model="vm.user.MobileNumber" class="form-control" required />
+                    </div>
+
+                    <div class="form-group" style="flex: 1 1 45%; min-width: 200px;">
+                        <label for="userPassword" style="font-weight: bold; color: #333;">Password</label>
+                        <input type="password" id="userPassword" ng-model="vm.user.Password" class="form-control" required />
+                    </div>
+
+                    <div class="form-group" style="flex: 1 1 45%; min-width: 200px;">
+                        <label for="userPhoto" style="font-weight: bold; color: #333;">Photo</label>
+                        <input type="file" id="userPhoto" class="form-control" />
+                    </div>
+
+                    <div style="flex: 1 1 100%; display: flex; justify-content: center;">
+                        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; background-color: #6f63cc; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer;">
+                            Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-
-    <!-- Display error message if exists -->
-    <div ng-if="vm.errorMessage" class="alert alert-danger" style="margin-bottom: 20px; color: #721c24; background-color: #f8d7da; padding: 10px; border-radius: 5px;">
-        {{ vm.errorMessage }}
-    </div>
-
-    <form id="addUserForm" ng-submit="vm.submitForm()" enctype="multipart/form-data" style="display: flex; flex-wrap: wrap; gap: 15px;">
-        <div class="form-group" style="flex: 1 1 45%; min-width: 200px;">
-            <label for="name" style="font-weight: bold; color: #333;">Name</label>
-            <input type="text" id="name" ng-model="vm.user.Name" class="form-control" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; box-sizing: border-box;" />
-        </div>
-
-        <div class="form-group" style="flex: 1 1 45%; min-width: 200px;">
-            <label for="email" style="font-weight: bold; color: #333;">Email</label>
-            <input type="email" id="email" ng-model="vm.user.Email" class="form-control" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; box-sizing: border-box;" />
-        </div>
-
-        <div class="form-group" style="flex: 1 1 45%; min-width: 200px;">
-            <label for="mobileNumber" style="font-weight: bold; color: #333;">Mobile Number</label>
-            <input type="text" id="mobileNumber" ng-model="vm.user.MobileNumber" class="form-control" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; box-sizing: border-box;" />
-        </div>
-
-        <div class="form-group" style="flex: 1 1 45%; min-width: 200px;">
-            <label for="password" style="font-weight: bold; color: #333;">Password</label>
-            <input type="password" id="password" ng-model="vm.user.Password" class="form-control" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; box-sizing: border-box;" />
-        </div>
-
-        <!-- File input for photo -->
-        <div class="form-group" style="flex: 1 1 45%; min-width: 200px;">
-            <label for="photo" style="font-weight: bold; color: #333;">Photo</label>
-            <input type="file" id="photo" class="form-control" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; box-sizing: border-box;" />
-        </div>
-
-        <div style="flex: 1 1 100%; display: flex; justify-content: center;">
-            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; background-color: #6f63cc; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer;">
-                Save
-            </button>
-        </div>
-    </form>
 </div>

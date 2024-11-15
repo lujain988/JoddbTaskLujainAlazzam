@@ -5,34 +5,43 @@
         .module('app')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$location', 'UserService'];
+    LoginController.$inject = ['$rootScope', '$location', 'UserService'];
 
-    function LoginController($location, UserService) {
+    function LoginController($rootScope, $location, UserService) {
         var vm = this;
         vm.username = '';
         vm.password = '';
-        vm.errorMessage = ''; // To display any error messages
+        vm.errorMessage = '';
+        vm.activePath = $location.path(); // Initialize with current path
 
-        // Function to handle login on form submission
+        // Watch for route changes to update the active path
+        $rootScope.$on('$locationChangeSuccess', function () {
+            vm.activePath = $location.path();
+        });
+
         vm.login = function () {
-            console.log('Attempting to log in with username:', vm.username);
-
-            // Call the UserService to login
             UserService.login(vm.username, vm.password)
                 .then(function (response) {
-                    console.log('Login response in LoginController:', response); // Log the full response
-
-                    if (response && response.data && response.data.success) { // Access response.data.success
-                        console.log('Login successful, redirecting to home...');
+                    if (response.data.success) {
+                        $rootScope.isLoggedIn = true;
                         $location.path('/home');
                     } else {
-                        console.log('Login failed:', response && response.data ? response.data.message : 'Unknown error');
-                        vm.errorMessage = response && response.data ? response.data.message : 'Invalid username or password';
+                        vm.errorMessage = response.data.message;
                     }
                 })
+                .catch(function () {
+                    vm.errorMessage = 'An error occurred. Please try again.';
+                });
+        };
+
+        vm.logout = function () {
+            UserService.logout()
+                .then(function () {
+                    $rootScope.isLoggedIn = false;
+                    $location.path('/login');
+                })
                 .catch(function (error) {
-                    console.error('An error occurred during login:', error);
-                    vm.errorMessage = 'An error occurred during login. Please try again.';
+                    console.error("Error during logout:", error);
                 });
         };
     }

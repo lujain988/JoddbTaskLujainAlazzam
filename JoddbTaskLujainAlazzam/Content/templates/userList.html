@@ -1,172 +1,178 @@
-﻿<div ng-controller="UserListController as vm">
-    <h2>User List</h2>
+﻿<div ng-controller="UserListController as vm" ng-show="$root.isLoggedIn">
+    <div class="card right-aligned">
+        <h2 class="card-title">User List</h2>
 
-    <!-- Display error message if it exists -->
-    <div ng-if="vm.errorMessage" class="alert alert-danger">
-        {{ vm.errorMessage }}
+        <div ng-if="vm.errorMessage" class="alert alert-danger">
+            {{ vm.errorMessage }}
+        </div>
+
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>CUSTOMER</th>
+                    <th>MOBILE NUMBER</th>
+                    <th>PASSWORD</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in vm.users" ng-class="{'purple-row': $even}">
+                    <td>{{ user.Id }}</td>
+                    <td>
+                        <div class="user-info">
+                            <img ng-src="{{ user.PhotoPath }}" alt="User Photo" class="user-photo" />
+                            <div class="user-details">
+                                <div class="user-name">{{ user.Name }}</div>
+                                <div class="user-email">{{ user.Email }}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>{{ user.MobileNumber }}</td>
+                    <td>{{ user.Password }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="pagination">
+            <button ng-click="vm.goToPage(vm.pageNumber - 5)" ng-disabled="vm.pageNumber <= 5">
+                &lt; Prev
+            </button>
+
+            <button ng-repeat="page in vm.visiblePages track by $index"
+                    ng-click="vm.goToPage(page)"
+                    ng-class="{'active': page === vm.pageNumber}">
+                {{ page }}
+            </button>
+
+            <button ng-click="vm.goToPage(vm.pageNumber + 5)" ng-disabled="vm.pageNumber >= vm.totalPages - 5">
+                ...
+            </button>
+
+            <button ng-click="vm.goToPage(vm.totalPages)" ng-disabled="vm.pageNumber === vm.totalPages">
+                Last ({{ vm.totalPages }})
+            </button>
+        </div>
+
+
+        <p ng-if="vm.loading" class="text-center">Loading...</p>
     </div>
-
-    <!-- Table displaying user data -->
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Photo</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Mobile Number</th>
-                <th>Password</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="user in vm.users">
-                <td><img ng-src="{{ '/' + user.PhotoPath }}" alt="User Photo" width="50" height="50" /></td>
-                <td>{{ user.Name }}</td>
-                <td>{{ user.Email }}</td>
-                <td>{{ user.MobileNumber }}</td>
-                <td>{{ user.Password }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <!-- Pagination controls -->
-    <div class="pagination">
-        <button ng-repeat="page in vm.visiblePages track by $index"
-                ng-click="vm.goToPage(page)"
-                ng-class="{'active': page === vm.pageNumber}">
-            {{ page }}
-        </button>
-
-        <!-- "Next" and "Last" buttons for easier navigation -->
-        <button ng-click="vm.goToPage(vm.pageNumber + 1)" ng-disabled="vm.pageNumber >= vm.totalPages">Next</button>
-        <button ng-click="vm.goToPage(vm.totalPages)" ng-disabled="vm.pageNumber === vm.totalPages">Last ({{ vm.totalPages }})</button>
-    </div>
-
-    <!-- Loading Indicator -->
-    <p ng-if="vm.loading" class="text-center">Loading...</p>
 </div>
- <style>
 
-     /* Container Styling */
-     div[ng-controller="UserListController as vm"] {
-         max-width: 900px;
-         margin: 20px auto;
-         padding: 20px;
-         background-color: #f7f9fc;
-         border-radius: 8px;
-         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-     }
+<style>
+    .card {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border: 1px solid #f0f0f0;
+    }
 
-         /* Title Styling */
-         div[ng-controller="UserListController as vm"] h2 {
-             color: #333;
-             font-weight: bold;
-             font-size: 20px;
-             margin-bottom: 20px;
-         }
+    .right-aligned {
+        margin-left: 231px;
+        margin-right: 0;
+        width: 76%;
+    }
 
-     /* Error Message Styling */
-     .alert.alert-danger {
-         background-color: #f8d7da;
-         color: #721c24;
-         border: 1px solid #f5c6cb;
-         padding: 10px;
-         border-radius: 5px;
-         margin-bottom: 15px;
-     }
+    .card-title {
+        font-weight: bold;
+        color: #333;
+        font-size: 18px;
+        margin-bottom: 20px;
+    }
 
-     /* Table Styling */
-     .table {
-         width: 100%;
-         border-collapse: collapse;
-         font-size: 14px;
-         color: #333;
-     }
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+        color: #333;
+    }
 
-         .table thead {
-             background-color: #f0f4f8;
-             text-transform: uppercase;
-             color: #333;
-         }
+        .styled-table thead {
+            background-color: #f9f9ff;
+            text-transform: uppercase;
+            color: #666;
+        }
 
-         .table th,
-         .table td {
-             padding: 12px 15px;
-             text-align: left;
-         }
+        .styled-table th,
+        .styled-table td {
+            padding: 15px;
+            text-align: left;
+        }
 
-             .table td img {
-                 border-radius: 50%;
-                 width: 40px;
-                 height: 40px;
-             }
+        .styled-table tbody tr:nth-child(odd) {
+            background-color: #ede7f6;
+        }
 
-         /* Striped Rows */
-         .table tbody tr:nth-child(even) {
-             background-color: #f9f9ff;
-         }
+        .styled-table tbody tr:nth-child(even) {
+            background-color: #ffffff;
+        }
 
-         .table tbody tr:hover {
-             background-color: #f0f4f8;
-         }
+        .styled-table tbody tr:hover {
+            background-color: #e0e7ff;
+        }
 
-     /* Status Badge Styling */
-     .badge {
-         display: inline-block;
-         padding: 5px 10px;
-         font-size: 12px;
-         font-weight: bold;
-         border-radius: 12px;
-         text-transform: capitalize;
-     }
+    .user-info {
+        display: flex;
+        align-items: center;
+    }
 
-     .badge-paid {
-         background-color: #d4edda;
-         color: #155724;
-     }
+    .user-photo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
 
-     .badge-cancelled {
-         background-color: #f8d7da;
-         color: #721c24;
-     }
+    .user-details .user-name {
+        font-weight: bold;
+        color: #333;
+    }
 
-     .badge-refunded {
-         background-color: #d1ecf1;
-         color: #0c5460;
-     }
+    .user-details .user-email {
+        font-size: 12px;
+        color: #888;
+    }
 
-     /* Pagination Styling */
-     .pagination {
-         display: flex;
-         justify-content: center;
-         margin-top: 20px;
-     }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
 
-         .pagination button {
-             background-color: #6f63cc;
-             color: white;
-             border: none;
-             border-radius: 4px;
-             padding: 8px 12px;
-             margin: 0 5px;
-             cursor: pointer;
-             font-size: 14px;
-         }
+        .pagination button {
+            background-color: #6f63cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
 
-             .pagination button:hover {
-                 background-color: #5a51b1;
-             }
+            .pagination button:hover {
+                background-color: #5a51b1;
+            }
 
-             .pagination button:disabled {
-                 background-color: #ccc;
-                 cursor: not-allowed;
-             }
+            .pagination button:disabled {
+                background-color: #ccc;
+                cursor: not-allowed;
+            }
 
-     /* Loading Indicator */
-     .text-center {
-         text-align: center;
-         font-weight: bold;
-         color: #6f63cc;
-         margin-top: 20px;
-     }
+    .text-center {
+        text-align: center;
+        font-weight: bold;
+        color: #6f63cc;
+        margin-top: 20px;
+    }
+    .pagination button.active {
+        background-color: #493d93; 
+        font-weight: bold;
+        border: 2px solid #3d327a;
+    }
 
- </style>
+
+
+</style>

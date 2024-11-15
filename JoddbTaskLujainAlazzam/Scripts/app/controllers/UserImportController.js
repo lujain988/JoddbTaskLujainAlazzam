@@ -5,9 +5,9 @@
         .module('app')
         .controller('UserImportController', UserImportController);
 
-    UserImportController.$inject = ['UserImportService', '$scope'];
+    UserImportController.$inject = ['UserImportService', '$scope', '$window'];
 
-    function UserImportController(UserImportService, $scope) {
+    function UserImportController(UserImportService, $scope, $window) {
         var vm = this;
 
         vm.file = null;
@@ -16,7 +16,7 @@
             $scope.$apply(function () {
                 vm.file = event.target.files[0] || null;
                 if (vm.file) {
-                    vm.uploadFile(); 
+                    vm.uploadFile();
                 }
             });
         };
@@ -35,7 +35,6 @@
                 return;
             }
 
-            // Show loading SweetAlert notification
             Swal.fire({
                 title: 'Uploading...',
                 text: 'Please wait while we upload your file.',
@@ -49,7 +48,7 @@
             });
 
             UserImportService.uploadFile(vm.file).then(function (response) {
-                Swal.close();  
+                Swal.close();
 
                 if (response.data.success) {
                     Swal.fire({
@@ -60,20 +59,24 @@
                         position: 'top-end',
                         timer: 3500,
                         showConfirmButton: false
+                    }).then(function () {
+                        $window.location.reload(); 
                     });
                 } else {
                     Swal.fire({
                         icon: 'error',
                         title: 'Upload Failed',
-                        text: 'The users in this file are alrady uploaded',
+                        text: 'The users in this file are already uploaded.',
                         toast: true,
                         position: 'top-end',
                         timer: 3500,
                         showConfirmButton: false
+                    }).then(function () {
+                        $window.location.reload();
                     });
                 }
             }, function (error) {
-                Swal.close();  // Close the loading notification
+                Swal.close();
                 Swal.fire({
                     icon: 'error',
                     title: 'Upload Error',
@@ -82,11 +85,12 @@
                     position: 'top-end',
                     timer: 3500,
                     showConfirmButton: false
+                }).then(function () {
+                    $window.location.reload();
                 });
             });
         };
 
-        // Function to trigger file input programmatically
         vm.triggerFileInput = function () {
             document.getElementById('excelFile').click();
         };

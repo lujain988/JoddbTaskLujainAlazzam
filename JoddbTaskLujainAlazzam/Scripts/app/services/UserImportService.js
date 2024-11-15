@@ -2,8 +2,8 @@
     'use strict';
 
     angular
-        .module('app')  // Make sure this is the same module used in your application
-        .factory('UserImportService', UserImportService);  // Register the service
+        .module('app') 
+        .factory('UserImportService', UserImportService);  
 
     UserImportService.$inject = ['$http'];
 

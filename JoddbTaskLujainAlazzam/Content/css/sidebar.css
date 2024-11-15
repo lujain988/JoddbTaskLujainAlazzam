@@ -1,10 +1,7 @@
-﻿/* sidebar.css */
-
-/* Sidebar styling */
-.sidebar {
+﻿.sidebar {
     width: 250px;
     height: 100vh;
-    background-color: #1f2633;
+    background-color: #101223; 
     color: #ffffff;
     position: fixed;
     top: 0;
@@ -13,27 +10,17 @@
     display: flex;
     flex-direction: column;
     overflow-y: auto;
-    border-top-right-radius: 20px;
+    padding-bottom: 20px;
 }
 
-    /* Logo Section */
     .sidebar .logo {
         text-align: center;
         font-size: 1.5em;
         font-weight: bold;
         color: #ffffff;
         margin-bottom: 30px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
     }
 
-        .sidebar .logo img {
-            width: 50px;
-            margin-bottom: 10px;
-        }
-
-    /* Sidebar Section Titles */
     .sidebar .nav-section {
         margin-top: 20px;
         padding-left: 20px;
@@ -44,16 +31,17 @@
         letter-spacing: 1px;
     }
 
-    /* Sidebar Links */
     .sidebar .nav-link {
-        color: #ffffff;
+        color: #a1a6b2;
         font-size: 0.9rem;
         padding: 10px 20px;
         display: flex;
         align-items: center;
         text-decoration: none;
-        border-radius: 8px;
-        transition: background 0.3s ease;
+        border-radius: 50px 0 0 50px;
+        transition: background 0.3s ease, color 0.3s ease;
+        position: relative;
+        cursor: pointer;
     }
 
         .sidebar .nav-link i {
@@ -62,61 +50,15 @@
             color: #a1a6b2;
         }
 
-        /* Active and Hover States */
-        .sidebar .nav-link.active {
+        .sidebar .nav-link.active, .sidebar .nav-link:hover {
             background-color: #ffffff;
-            color: #1f2633;
+            color: #5e72e4; 
             font-weight: bold;
         }
 
-        .sidebar .nav-link:hover {
-            background-color: #394152;
-            color: #ffffff;
-        }
-
-    /* Indentation for Submenu Items */
-    .sidebar .submenu {
-        padding-left: 15px;
-        display: flex;
-        flex-direction: column;
-    }
-
-    /* Collapsible Submenu Styling */
-    .sidebar .submenu-toggle::after {
-        content: "\f078";
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        margin-left: auto;
-        transition: transform 0.3s;
-    }
-
-    .sidebar .submenu-toggle.collapsed::after {
-        transform: rotate(-90deg);
-    }
-
-/* Main content area */
-.main-content {
-    margin-left: 250px; /* Leave space for sidebar */
-    padding: 20px;
-    background-color: #f5f6fa;
-    min-height: 100vh;
-}
-
-/* Header styling */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
-    font-size: 1.5em;
-    color: #5e72e4;
-}
-
-/* Footer styling */
-footer {
-    background-color: #1f2633;
-    color: #ffffff;
-    padding: 15px 0;
-    text-align: center;
-    font-size: 0.9rem;
-}
+            .sidebar .nav-link.active i, .sidebar .nav-link:hover i {
+                background-color: #5e72e4; 
+                color: #ffffff; 
+                border-radius: 50%; 
+                padding: 8px;
+            }

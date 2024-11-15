@@ -2,15 +2,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "User Management SPA";
 }
-<div ng-controller="UserImportController as vm" style="">
-    <!-- Import Icon Button (Floats Right) -->
+<div ng-controller="UserImportController as vm" style="" ng-show="$root.isLoggedIn">
     <button type="button" ng-click="vm.triggerFileInput()" style="float: right; display: flex; align-items: center; padding: 8px 16px; background-color: white; color: #6f63cc; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; cursor: pointer; margin: 20px; margin-top: -30px;">
         <i class="fas fa-download" style="margin-right: 8px;"></i> Import
     </button>
 
-    <!-- Hidden File Input for Upload -->
     <input type="file" id="excelFile" style="display: none;" onchange="angular.element(this).scope().vm.onFileChange(event)" />
 </div>
-
 
 <div ng-view></div>
