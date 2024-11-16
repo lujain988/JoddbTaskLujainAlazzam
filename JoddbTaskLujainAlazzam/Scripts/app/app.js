@@ -64,10 +64,11 @@
 
             // Prevent unauthorized access
             $rootScope.$on('$routeChangeStart', function (event, next) {
-                if (!$rootScope.isLoggedIn && next.$$route.originalPath !== '/login') {
+                if (next.$$route && !$rootScope.isLoggedIn && next.$$route.originalPath !== '/login') {
                     event.preventDefault();
                     $location.path('/login');
                 }
             });
+
         }]);
 })();

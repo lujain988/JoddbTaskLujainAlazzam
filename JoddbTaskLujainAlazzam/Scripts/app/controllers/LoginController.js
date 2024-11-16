@@ -12,9 +12,8 @@
         vm.username = '';
         vm.password = '';
         vm.errorMessage = '';
-        vm.activePath = $location.path(); // Initialize with current path
+        vm.activePath = $location.path();
 
-        // Watch for route changes to update the active path
         $rootScope.$on('$locationChangeSuccess', function () {
             vm.activePath = $location.path();
         });

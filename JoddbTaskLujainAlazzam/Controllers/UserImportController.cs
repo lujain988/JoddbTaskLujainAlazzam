@@ -40,23 +40,18 @@ namespace YourNamespace.Controllers
                     var worksheet = package.Workbook.Worksheets[0];
                     for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
                     {
-                        // Read and validate data
                         string name = worksheet.Cells[row, 2].Text.Trim();
                         string email = worksheet.Cells[row, 3].Text.Trim();
                         string mobileNo = worksheet.Cells[row, 4].Text.Trim();
 
-                        // Truncate name and email if they exceed limits
                         name = name.Length > 50 ? name.Substring(0, 50) : name;
                         email = email.Length > 100 ? email.Substring(0, 100) : email;
 
-                        // Validate MobileNo
                         if (!IsValidMobileNumber(mobileNo))
                         {
-                            // Skip invalid mobile numbers
                             continue;
                         }
 
-                        // Create user instance
                         var user = new User
                         {
                             Name = name,
