@@ -32,6 +32,10 @@
             <span class="link-highlight"></span>
             <i class="fas fa-user-plus"></i> Add User
         </a>
+        <a ng-href="#/import" class="nav-link" ng-class="{'active': vm.activePath === '/import'}">
+            <span class="link-highlight"></span>
+            <i class="fas fa-download"></i> Import
+        </a>
 
         <div class="nav-section">ACCOUNT</div>
         <a ng-click="vm.logout()" class="nav-link" ng-class="{'active': vm.activePath === '/login'}">

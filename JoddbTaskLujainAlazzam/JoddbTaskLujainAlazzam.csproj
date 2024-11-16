@@ -206,6 +206,7 @@
     <Content Include="Content\image\shield.png" />
     <Content Include="Content\templates\addUser.html" />
     <Content Include="Content\templates\home.html" />
+    <Content Include="Content\templates\UserImport.html" />
     <Content Include="Content\templates\userList.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
