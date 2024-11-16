@@ -1,0 +1,16 @@
+CREATE DATABASE UserManagementDB;
+
+
+USE UserManagementDB;
+
+
+CREATE TABLE Users (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(100) NOT NULL,
+    Email NVARCHAR(255) NOT NULL UNIQUE,
+    MobileNumber NVARCHAR(15) NOT NULL,
+    Password NVARCHAR(255) NOT NULL,
+    PhotoPath NVARCHAR(MAX) NULL
+);
+
+CREATE INDEX IDX_Users_Email ON Users (Email);
